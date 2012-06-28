@@ -1,0 +1,24 @@
+{
+  "author": "alexandru topliceanu <alexandru.topliceanu@gmail.com> (http://alexandrutopliceanu.ro)",
+  "name": "simplebase",
+  "description": "simple backend for your javascript applications",
+  "version": "0.0.1",
+  "homepage": "http://github.com/topliceanu/simplebase",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/topliceanu/simplebase.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+		"mocha": "*",
+		"connect": "*"
+	},
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  }
+}
