@@ -14,8 +14,7 @@
   },
   "dependencies": {
 		"mocha": "*",
-		"connect": "*",
-		"redback": "*"
+		"express": "*"
 	},
   "devDependencies": {},
   "optionalDependencies": {},
