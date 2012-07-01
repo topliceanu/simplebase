@@ -1,32 +1,63 @@
 var express = require('express');
+var connect = require('connect');
+var MongoStore = require('connect-mongodb');
 
 var routes = require('./routes');
 var conf = require('./conf.js');
+var util = require('./util.js');
 
 
 var app = module.exports = express.createServer();
 
+
 // General Configuration
-app.configure(function(){
+app.configure( function () {
+	app.use(connect.favicon(conf.favicon, {
+		'maxAge': conf.static.maxAge
+	}));
   app.use(express.bodyParser());
+	app.use(connect.query());
+	app.use(express.logger('dev'));
   app.use(express.methodOverride());
-  app.use(express.static(__dirname + '/public'));
+	app.use(connect.cookieParser(conf.cookie.secret));
+	app.use(express.session({
+		'secret': conf.cookie.secret,
+		'key': conf.cookie.key, 
+		'cookie': { 
+			'maxAge': conf.cookie.maxAge,
+		},
+		'store': new MongoStore({
+			'url': conf.mongo.url
+		})
+	}));
 });
 
 
 // Developement Configuration
-app.configure('development', function(){
+app.configure(conf.DEVELOPMENT, function () {
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+  app.use(express.static(conf.static.publicDir));
 });
 
 
 // Production Configuration
-app.configure('production', function(){
+app.configure(conf.PRODUCTION, function () {
   app.use(express.errorHandler());
+	app.use(express.logger({
+		'format': ':response-time ms - :date - :req[x-real-ip] - :method :url :user-agent / :referrer'
+	}));
+	app.use(connect.compress());	
+  app.use(express.static(conf.static.publicDir, {
+		'maxAge': conf.static.maxAge
+	}));
+	app.use(connect.staticCache());
 });
 
 
 // start http server
-app.listen(conf.http.port, conf.http.host, function(){
-  console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+app.listen(conf.http.port, conf.http.host, function () {
+  util.log('info', 'Express server started', {
+		'address': app.address(), 
+		'settings': app.settings
+	});
 });
