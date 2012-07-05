@@ -5,6 +5,8 @@ var MongoStore = require('connect-mongodb');
 var routes = require('./routes');
 var conf = require('./conf.js');
 var util = require('./util.js');
+var models = require('./models');
+var rest = require('./modules/rest.js');
 
 
 var app = module.exports = express.createServer();
@@ -52,6 +54,11 @@ app.configure(conf.PRODUCTION, function () {
 	}));
 	app.use(connect.staticCache());
 });
+
+
+// add routes
+routes(app);
+rest(app);
 
 
 // start http server

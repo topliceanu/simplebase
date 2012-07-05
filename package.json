@@ -17,11 +17,15 @@
 		"express": "~2.5.11",
 		"connect": "~2.3.5",
 		"winston": "~0.6.1",
-		"express-session-mongo": "~0.0.1"
+		"express-session-mongo": "~0.0.1",
+		"mongoose": "~2.7.1", 
+		"mongoose-types": "~1.0.3",
+		"mers": "~0.3.8",
+		"mongoose-gen": "~0.0.1"
 	},
   "devDependencies": {},
   "optionalDependencies": {},
   "engines": {
-    "node": "*"
+    "node": "0.6"
   }
 }
