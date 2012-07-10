@@ -2,11 +2,10 @@ var express = require('express');
 var connect = require('connect');
 var MongoStore = require('connect-mongodb');
 
-var routes = require('./routes');
 var conf = require('./conf.js');
-var util = require('./util.js');
-var models = require('./models');
-var rest = require('./modules/rest.js');
+var admin = require('./admin/');
+var util = require('./modules/util.js');
+var auth = require('./modules/auth.js');
 
 
 var app = module.exports = express.createServer();
@@ -32,6 +31,8 @@ app.configure( function () {
 			'url': conf.mongo.url
 		})
 	}));
+	app.use(auth.initialize());
+	app.use(auth.session());
 });
 
 
@@ -56,15 +57,13 @@ app.configure(conf.PRODUCTION, function () {
 });
 
 
-// add routes
-routes(app);
-rest(app);
+// routes
+app.use('/admin', admin);
 
 
 // start http server
-app.listen(conf.http.port, conf.http.host, function () {
+app.listen(conf.http.port, conf.http.host, function onListen () {
   util.log('info', 'Express server started', {
-		'address': app.address(), 
-		'settings': app.settings
+		'settings': conf.http
 	});
 });

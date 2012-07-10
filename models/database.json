@@ -1,4 +1,12 @@
 {
 	"models": {
+		"Book": {
+			"title": {"type": "String", "required": true, "index": true},
+			"author": {"type": "ObjectId", "ref": "Author", "required": true, "index": true}
+		},
+		"Author": {
+			"name": {"type": "String", "required": true, "index": true},
+			"books": [{"type": "ObjectId", "ref": "Book"}]
+		}
 	}
 }

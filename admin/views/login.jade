@@ -1,0 +1,36 @@
+!!! 5
+html(lang='en')
+	head
+		meta(charset='utf-8')
+		title Simplebase Admin
+		meta(name='viewport', content='width=device-width, initial-scale=1.0')
+		meta(name='description', content='Simplebase Administration')
+		meta(name='author', content='')
+
+		link(href='/admin/stylesheets/bootstrap.css', rel='stylesheet')
+		link(href='/admin/stylesheets/bootstrap-responsive.css', rel='stylesheet')
+		link(href='/admin/stylesheets/style.css', rel='stylesheet')
+
+		link(rel='shortcut icon', href='/admin/images/favicon.ico')
+		link(rel='apple-touch-icon-precomposed', sizes='144x144', href='/admin/images/apple-touch-icon-144-precomposed.png')
+		link(rel='apple-touch-icon-precomposed', sizes='114x114', href='/admin/images/apple-touch-icon-114-precomposed.png')
+		link(rel='apple-touch-icon-precomposed', sizes='72x72', href='/admin/images/apple-touch-icon-72-precomposed.png')
+		link(rel='apple-touch-icon-precomposed', href='/admin/images/apple-touch-icon-57-precomposed.png')
+
+	body
+		.navbar.navbar-fixed-top
+			.navbar-inner
+				.container
+					a.brand(href='#') Simple Base Admin
+		.container
+			.row-fluid
+					.span4.offset2
+						input(type="text", placeholder="username")
+					.span4
+						input(type="password", placeholder="password")
+					.span2	
+						button.btn Login!
+					.span2
+
+		script(src='/admin/javascripts/jquery.js')
+		script(src='/admin/javascripts/bootstrap.js')
