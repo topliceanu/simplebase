@@ -31,8 +31,8 @@ app.configure( function () {
 			'url': conf.mongo.url
 		})
 	}));
-	app.use(auth.initialize());
-	app.use(auth.session());
+	//app.use(auth.initialize());
+	//app.use(auth.session());
 });
 
 
